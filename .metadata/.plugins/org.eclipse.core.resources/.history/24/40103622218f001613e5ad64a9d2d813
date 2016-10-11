@@ -1,0 +1,194 @@
+package ordenamiento;
+
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+
+public class ordenamiento {
+	
+	public void vector () {
+		int vec [] = { 4, 8, -2, 5, 3, -1 };
+		System.out.print("vector: ");
+		for(int j=0; j<vec.length; j++){
+			System.out.print(vec[j] + " ");
+		}
+		System.out.println();		
+	}
+	
+	public void burbujeo () {
+		int vec [] = { 4, 8, -2, 5, 3, -1 };
+		int aux;
+		int flag=1;
+		for(int j=1; j<vec.length; j++){
+			if (flag ==1){
+				for (int i=0; i<vec.length-j; i++){
+					flag=0;
+					if(vec[i]>vec[i+1]){
+						aux = vec[i];
+						vec[i] = vec [i+1];
+						vec [i+1] = aux;
+						flag=1;
+					}
+				}
+			}
+		}
+		System.out.print("burbujeo: ");
+		for(int j=0; j<vec.length; j++){
+			System.out.print(vec[j] + " ");
+		}
+		System.out.println();
+	}
+		
+	public void seleccion () {
+		int vec [] = { 4, 8, -2, 5, 3, -1 };
+		int aux;
+		int pos;
+		for(int j=0; j<vec.length-1; j++){
+			aux=vec[j];
+			pos = j;
+			for (int i=j+1; i<vec.length; i++){
+				if (vec[i]<aux){
+					aux=vec[i];
+					pos=i;
+				}
+			}
+			vec [pos]=vec[j];
+			vec [j]=aux;
+		}
+		System.out.print("seleccion: ");
+		for(int j=0; j<vec.length; j++){
+			System.out.print(vec[j] + " ");
+		}
+		System.out.println();
+	}
+	
+	public void insercion () {
+		int vec [] = { 4, 8, -2, 5, 3, -1 };
+		int aux;
+		int pos=0;
+		for(int i=0; i<vec.length-1; i++){
+			if(vec[i+1]<vec[i]){
+				aux=vec[i+1];
+				vec[i+1]=vec[i];
+				if(i>0){
+					for(int j=i-1; j>=0;j--){
+						if(aux<vec[j]){
+							vec[j+1]=vec[j];
+						}
+						else{
+							pos=j;
+							break;
+						}
+					}
+				}
+				vec[pos]=aux;
+				System.out.println(aux);
+			}
+		}
+		System.out.print("insercion: ");
+		for(int j=0; j<vec.length; j++){
+			System.out.print(vec[j] + " ");
+		}
+		System.out.println();		
+	}
+	
+	public void insercion1() {
+		int vec [] = { 4, 8, -2, 5, 3, -1 };
+		int aux;
+		int j;
+		for (int i = 1; i < vec.length; i++) {
+			aux = vec[i];
+			j = i - 1;
+			while ((j >= 0) && (aux < vec[j])) {
+				vec[j + 1] = vec[j];
+				j--;
+			}
+			vec[j + 1] = aux;
+		}
+		System.out.print("insercion1: ");
+		for(int k=0; k<vec.length; k++){
+			System.out.print(vec[k] + " ");
+		}
+		System.out.println();	
+	}
+
+	
+	public void shell (){
+		int vec [] = { 4, 8, -2, 5, 3, -1 };
+		int i=1;
+		int cant =1;
+		int aux;
+		boolean cambios;
+		while (i<vec.length){
+			i=i*3+1;
+			cant++;
+		}
+		int serie []=new int [cant-1];
+		serie[0]=1;
+		for (i=1 ; i<serie.length; i++){
+			serie[i]=serie[i-1]*3+1;			
+		}
+		
+		for(int j =serie.length-1; j>=0; j--){
+			cambios = true;
+			while (cambios) { 
+				cambios = false;
+				for (int k=j;k<vec.length;k++){
+					if (vec[k - j] > vec[k]) {
+						aux = vec[k]; 
+						vec[k] = vec [k - j];
+						vec[k - j] = aux;
+						cambios = true; 
+					}
+				}
+			}
+			
+		}
+		System.out.print("shell: ");
+		for(int j=0; j<vec.length; j++){
+			System.out.print(vec[j] + " ");
+		}
+		System.out.println();
+		
+		
+	}
+	
+	public void shell1() {
+		int vec [] = { 4, 8, -2, 5, 3, -1 };
+		int salto, aux, i;
+		boolean cambios;
+		for (salto = vec.length / 2; salto != 0; salto /= 2) {
+			cambios = true;
+			while (cambios) { 
+				cambios = false;
+				for (i = salto; i < vec.length; i++) 
+					if (vec[i - salto] > vec[i]) {
+						aux = vec[i]; 
+						vec[i] = vec [i - salto];
+						vec[i - salto] = aux;
+						cambios = true; 
+					}
+			}
+		}
+		System.out.print("shell1: ");
+		for(int j=0; j<vec.length; j++){
+			System.out.print(vec[j] + " ");
+		}
+		System.out.println();		
+	}
+
+	
+	public static void main(String[] args) {
+		ordenamiento ord= new ordenamiento();
+		ord.vector();
+		ord.burbujeo();
+		ord.seleccion();
+		ord.insercion();
+		ord.shell1();
+		ord.shell();
+		ord.insercion1();
+	}
+
+}
